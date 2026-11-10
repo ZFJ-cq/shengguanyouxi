@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f2e8d5;
+  --color-paper-deep: #e6d8bc;
+  --color-ink: #26201a;
+  --color-ink-soft: #625646;
+  --color-cinnabar: #a3301f;
+  --color-cinnabar-soft: #c06448;
+  --color-gold: #a9853f;
+  --color-jade: #2f6b5e;
+
+  --font-song: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --font-kai: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    color: #26201a;
+    font-family: var(--font-song);
+    background-color: #ece0c9;
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.65), transparent 42%),
+      radial-gradient(circle at 82% 92%, rgba(120, 80, 40, 0.16), transparent 52%),
+      radial-gradient(circle at 55% 45%, rgba(255, 250, 240, 0.5), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(163, 48, 31, 0.18);
+  }
+}
+
+/* 纸面与边框 */
+.paper-card {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 246, 0.92), rgba(246, 236, 217, 0.92));
+  border: 1px solid rgba(120, 92, 56, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 10px 26px -18px rgba(60, 40, 20, 0.55);
+}
+
+.board-frame {
+  border: 1px solid rgba(122, 92, 52, 0.4);
+  box-shadow:
+    0 0 0 6px rgba(243, 233, 214, 0.8),
+    0 0 0 7px rgba(122, 92, 52, 0.22),
+    0 18px 40px -24px rgba(52, 34, 16, 0.6);
+}
+
+.seal-title {
+  font-family: var(--font-kai);
+  letter-spacing: 0.35em;
+  color: #a3301f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.rule-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(122, 92, 52, 0.45), transparent);
+}
+
+/* 骰子 */
+.top-spin {
+  animation: top-spin 0.45s linear infinite;
+}
+
+@keyframes top-spin {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.94);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* 移动端：悬浮掷骰 */
+.dice-roll {
+  animation: dice-roll 0.5s ease-in-out infinite;
+}
+
+@keyframes dice-roll {
+  0% {
+    transform: translateY(0) rotate(-10deg) scale(1);
+  }
+  25% {
+    transform: translateY(-7px) rotate(90deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-1px) rotate(180deg) scale(0.96);
+  }
+  75% {
+    transform: translateY(-8px) rotate(270deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) rotate(350deg) scale(1);
+  }
+}
+
+.dice-land {
+  animation: dice-land 0.5s cubic-bezier(0.22, 0.9, 0.32, 1.25);
+}
+
+@keyframes dice-land {
+  0% {
+    transform: scale(1.32) rotate(-9deg);
+    opacity: 0.35;
+  }
+  55% {
+    transform: scale(0.92) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.dice-ring {
+  animation: dice-ring 0.7s ease-out infinite;
+}
+
+@keyframes dice-ring {
+  from {
+    transform: scale(0.72);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@keyframes token-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.token {
+  animation: token-pop 0.35s ease-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.3s ease-out;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(122, 92, 52, 0.4) transparent;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgba(122, 92, 52, 0.35);
+  border-radius: 999px;
+}
